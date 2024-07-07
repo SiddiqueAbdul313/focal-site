@@ -17,20 +17,26 @@
   </head>
 
   <body>
-    <nav class="bg-[#292929] p-6 z-10 fixed w-full">
+    <nav class="bg-[#292929] p-6 z-10 absolute w-full">
       <div class="container mx-auto flex items-center justify-between">
         <!-- Mobile Menu Button and Search Bar -->
         <div class="flex items-center md:hidden space-x-4">
-          <button class="text-white focus:outline-none focus:text-gray-300">
+          <a class="text-white focus:outline-none focus:text-gray-300">
             <i class="fas fa-bars"></i>
-          </button>
+          </a>
           <button class="text-white focus:outline-none focus:text-gray-300">
             <i class="fas fa-search"></i>
           </button>
         </div>
         <div class="md:hidden flex items-center gap-3">
-          <i class="ri-menu-line text-xl text-white"></i>
-          <i class="ri-search-line text-xl text-white"></i>
+          <a href="#" id="mobileMenu">
+            <i class="ri-menu-line text-xl text-white"></i>
+          </a>
+          <a href="#" id="openMobileSearch">
+            <i
+              class="ri-search-line text-xl text-white"
+            ></i>
+          </a>
         </div>
         <!-- Logo -->
         <div class="text-white text-xl font-bold mx-auto md:mx-0">
@@ -61,10 +67,10 @@
             id="searchBtn"
             ><i class="ri-search-line"></i
           ></a>
-          <a href="#" class="hover:text-gray-300"
+          <a href="#" class="hover:text-gray-300" id="loginBtn"
             ><i class="ri-user-3-line"></i
           ></a>
-          <a href="#" class="hover:text-gray-300"
+          <a href="#" class="hover:text-gray-300" id="cartBtn"
             ><i class="ri-shopping-bag-3-line"></i
           ></a>
         </div>
@@ -73,13 +79,42 @@
           <a
             href="#"
             class="text-white text-xl focus:outline-none focus:text-gray-300"
+            id="openMobileCart"
           >
-            <i class="ri-shopping-bag-3-line"></i>
+            <i class="ri-shopping-bag-3-line" onclick="openCartDrawer()"></i>
           </a>
         </div>
       </div>
     </nav>
     <!-- sidebar -->
+    <!-- nav sidebar -->
+    <div class="nav-sidebar fixed w-full" id="navDrawer">
+      <!-- Content goes here -->
+      <div class="p-6">
+        <div class="flex gap-6">
+          <img
+          src="https://focal-theme-carbon.myshopify.com/cdn/shop/files/logo-focal.png?v=1630492228&width=100"
+          alt="logo"
+          class="bg-[#292929] rounded-xl p-2 scale-75"
+        />
+          <div id="navbarClose">
+            <i
+              class="ri-close-line absolute top-6 right-6 text-2xl cursor-pointer"
+            ></i>
+          </div>
+        </div>
+        <hr class="my-6 w-full" />
+        <div id="navDrawerList">
+          <ul class="leading-loose text-xl">
+            <li>Shop by Category</li>
+            <li>Shop by Device</li>
+            <li>Collections</li>
+            <li>Blog</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- nav sidebar -->
     <div class="sidebar fixed w-full" id="drawer">
       <!-- Content goes here -->
       <div class="p-6">
@@ -93,7 +128,9 @@
             class="w-64 outline-none border search-bar"
           />
           <div id="closeBtn">
-            <i class="ri-close-line absolute right-6 text-2xl cursor-pointer"></i>
+            <i
+              class="ri-close-line absolute right-6 text-2xl cursor-pointer"
+            ></i>
           </div>
         </div>
         <hr class="my-6 w-full" />
@@ -115,6 +152,35 @@
       </div>
     </div>
     <!-- sidebar -->
+
+    <!-- shopping cart sidebar -->
+    <div class="cart-sidebar fixed w-full" id="cartDrawer">
+      <div class="p-6">
+        <div class="flex items-center">
+          <div>
+            <i class="ri-shopping-bag-2-line text-2xl font-light"></i>
+          </div>
+          <h3 class="uppercase ml-3 text-xl font-bold">cart</h3>
+          <div id="closeCart">
+            <i
+              class="ri-close-line absolute top-5 right-6 text-2xl cursor-pointer"
+            ></i>
+          </div>
+        </div>
+        <hr class="my-6 w-full" />
+        <div class="h-screen flex items-center justify-center">
+          <div id="drawerContent" class="flex items-center flex-col w-3/4">
+            <p>Your cart is empty</p>
+            <button
+              class="sm:w-3/4 text-xs sm:text-sm bg-blue-500 text-white font-bold mt-4 py-4 px-2 hover:bg-blue-600 uppercase"
+            >
+              start shopping
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- shopping cart sidebar -->
 
     <!-- overlay -->
     <div
@@ -148,6 +214,97 @@
       </div>
     </div>
     <!-- overlay -->
+
+    <!-- user login overlay -->
+    <div
+      id="overlayLogin"
+      class="fixed inset-0 flex items-center justify-center bg-opacity-80 z-20 p-6"
+    >
+      <div class="bg-white p-6 shadow-lg w-full max-w-lg relative text-center">
+        <button
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          id="closeLogin"
+        >
+          <i class="ri-close-line text-2xl"></i>
+        </button>
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 uppercase">LOGIN</h2>
+        <p class="text-gray-600 mb-4">Please enter your details</p>
+        <input
+          type="email"
+          class="w-3/4 p-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+          placeholder="Your e-mail"
+        />
+        <input
+          type="password"
+          class="w-3/4 p-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+          placeholder="Enter Password"
+        />
+        <button
+          class="w-3/4 bg-blue-500 text-white font-bold p-2 hover:bg-blue-600 uppercase"
+          onclick="Login()"
+        >
+          Login
+        </button>
+        <p class="text-center text-sm">
+          Don't have an account?
+          <span id="createAccountLink" class="text-blue-500 cursor-pointer"
+            >Create Account</span
+          >
+        </p>
+      </div>
+    </div>
+    <!-- user login overlay -->
+    <!-- user create -->
+    <div
+      id="overlayCreateAccount"
+      class="fixed inset-0 flex items-center justify-center bg-opacity-80 z-20 p-6"
+    >
+      <div class="bg-white p-6 shadow-lg w-full max-w-lg relative text-center">
+        <button
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          id="closeUser"
+        >
+          <i class="ri-close-line text-2xl"></i>
+        </button>
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 uppercase">
+          Create Account
+        </h2>
+        <p class="text-gray-600 mb-4">Please enter your details</p>
+        <input
+          type="text"
+          class="w-3/4 p-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+          placeholder="Your Username"
+        />
+        <input
+          type="email"
+          class="w-3/4 p-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+          placeholder="Your e-mail"
+        />
+        <input
+          type="password"
+          class="w-3/4 p-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+          placeholder="Enter Password"
+        />
+        <input
+          type="password"
+          class="w-3/4 p-2 mb-4 border border-gray-300 focus:outline-none focus:border-blue-500"
+          placeholder="Confirm Password"
+        />
+        <button
+          class="w-3/4 bg-blue-500 text-white font-bold p-2 hover:bg-blue-600 uppercase"
+          onclick="Login()"
+        >
+          Create Account
+        </button>
+        <p class="text-center text-sm">
+          Already have an account?
+          <span id="backToLoginLink" class="text-blue-500 cursor-pointer"
+            >Login</span
+          >
+        </p>
+      </div>
+    </div>
+    <!-- user create -->
 
     <!-- Swiper -->
     <div class="swiper-container mt-8">

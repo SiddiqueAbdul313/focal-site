@@ -687,6 +687,14 @@ video {
   top: 1rem;
 }
 
+.top-5 {
+  top: 1.25rem;
+}
+
+.top-6 {
+  top: 1.5rem;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -766,6 +774,10 @@ video {
   margin-bottom: 1rem;
 }
 
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
 .mr-3 {
   margin-right: 0.75rem;
 }
@@ -780,6 +792,10 @@ video {
 
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .mt-8 {
@@ -889,6 +905,10 @@ video {
   height: 100%;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -959,6 +979,12 @@ video {
 
 .border-separate {
   border-collapse: separate;
+}
+
+.scale-75 {
+  --tw-scale-x: .75;
+  --tw-scale-y: .75;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .\!transform {
@@ -1447,6 +1473,10 @@ video {
   gap: 0.75rem;
 }
 
+.gap-6 {
+  gap: 1.5rem;
+}
+
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -1769,6 +1799,10 @@ video {
   border-radius: 0.25rem;
 }
 
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
 .rounded-b {
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
@@ -2049,6 +2083,11 @@ video {
   padding: 1.5rem;
 }
 
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -2144,8 +2183,17 @@ video {
   line-height: 1.75rem;
 }
 
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .font-bold {
   font-weight: 700;
+}
+
+.font-light {
+  font-weight: 300;
 }
 
 .font-medium {
@@ -2652,8 +2700,9 @@ video {
 html,
 body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 
 .swiper-container {
@@ -2727,8 +2776,30 @@ body {
 }
 
 .sidebar {
-  background-color: #f3f4f6;
+  background-color: #fff;
   position: fixed;
+}
+
+.nav-sidebar {
+  background-color: #fff;
+  position: fixed;
+  display: none;
+}
+
+.cart-sidebar{
+  background-color: #fff;
+  position: fixed;
+}
+
+#cartDrawer{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 60;
+  width: 30%;
+  height: 100%;
+  right: -100%;
+  overflow-x: hidden;
 }
 
 #drawer{
@@ -2738,8 +2809,19 @@ body {
   z-index: 50;
   width: 30%;
   height: 100%;
-  right: -30%;
+  right: -100%;
   overflow-x: hidden;
+}
+
+#navDrawer{
+}
+
+#overlayLogin{
+  display: none;
+}
+
+#overlayCreateAccount{
+  display: none;
 }
 
 @media (width<600px){
@@ -2749,6 +2831,25 @@ body {
 
   .search-bar{
     width: 60%;
+  }
+
+  #cartDrawer{
+    width: 70%;
+  }
+
+  .nav-sidebar{
+    display: block;
+  }
+
+  #navDrawer{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 50;
+    width: 60%;
+    height: 100%;
+    right: -100%;
+    overflow-x: hidden;
   }
 }
 
@@ -2857,6 +2958,10 @@ body {
 
   .sm\:hidden {
     display: none;
+  }
+
+  .sm\:w-3\/4 {
+    width: 75%;
   }
 
   .sm\:w-full {
